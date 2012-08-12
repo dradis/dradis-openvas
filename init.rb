@@ -1,0 +1,2 @@
+require 'openvas_upload'
+
