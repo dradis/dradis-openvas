@@ -1,6 +1,6 @@
 $:.push File.expand_path('../lib', __FILE__)
 require 'dradis/plugins/openvas/version'
-version = Dradis::Plugins::Openvas::VERSION::STRING
+version = Dradis::Plugins::OpenVAS::VERSION::STRING
 
 
 # Describe your gem and declare its dependencies:
