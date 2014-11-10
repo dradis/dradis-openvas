@@ -1,21 +1,8 @@
-# OpenvasUpload
+# hook to the framework base clases
+require 'dradis-plugins'
 
-require 'openvas_upload/filters'
-require 'openvas_upload/meta'
+# load this add-on's engine
+require 'dradis/plugins/openvas'
 
-# This includes the import plugin module in the dradis import plugin repository
-
-module OpenvasUpload
-  class Configuration < Core::Configurator
-    configure :namespace => 'openvas'
-    setting :category, :default => 'OpenVAS Scanner output'
-    setting :author, :default => 'OpenVAS Scanner plugin'
-    setting :node_label, :default => 'OpenVAS Output'
-  end
-end
-
-module Plugins
-  module Upload 
-    include OpenvasUpload
-  end
-end
+# load supporting OpenVAS classes
+require 'openvas/result'
