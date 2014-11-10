@@ -1,105 +1,101 @@
-module OpenvasUpload  
-  private
-  @@logger=nil
+module Dradis::Plugins::OpenVAS
+  class Importer < Dradis::Plugins::Upload::Importer
 
-  public
-  
-  # This method will be called by the framework when the user selects your 
-  # plugin from the drop down list of the 'Import from file' dialog
-  def self.import(params={})
+    # The framework will call this function if the user selects this plugin from
+    # the dropdown list and uploads a file.
+    # @returns true if the operation was successful, false otherwise
+    def import(params={})
+      file_content = File.read( params[:file] )
 
-    #Set an author name for the notes.
-    @plugin_author_name = Configuration.author
+      # Parse contents
+      logger.info{'Parsing OpenVAS output file...'}
+      @doc = Nokogiri::XML(file_content)
+      logger.info{'Done'}
 
-    @category = Category.find_or_create_by_name(Configuration.category)
 
-    #Create a parent node for the OpenVAS output
-    @openvas_node = Node.create(:label => Configuration.node_label)
+      # Detect valid OpenVAS XML
+      if @doc.xpath('/report').empty?
+        error = "No report results were detected in the uploaded file (/report). Ensure you uploaded an OpenVAS XML report."
+        logger.fatal{ error }
+        content_service.create_note text: error
+        return false
+      end
 
-    @@logger = params.fetch(:logger, Rails.logger)
-    @@logger.info('started debugging')
 
-    file_content = File.read( params[:file] )
+      @doc.xpath('/report/report/results/result').each do |xml_result|
+        process_result(xml_result)
+      end
 
-    doc = Nokogiri::XML(file_content)
-
-    if doc.root.name == 'openvas-report'
-      @hosts = parse_openvas_xml(doc)
-    else
-      error_note = Note.create(
-        :node => @openvas_node,
-        :author => @plugin_author_name,
-        :category => @category,
-        :text => "Document doesn't seem to be an OpenVAS report"
-      )
-      return
+      logger.info{ "Report processed." }
+      return true
     end
 
-    @hosts.each do |host|
-      host_node = Node.create(:label => host['name'], :parent_id => @openvas_node.id)
-      host_info_note = Note.create(
-          :node => host_node,
-          :author => @plugin_author_name,
-          :category => @category,
-          :text => "OpenVAS Host Results\nIP Address: #{host['ip']}\nScan Started: #{host['start_time']}
-          \nScan Finished: #{host['end_time']}"
-      )
-      host['ports'].each do |port_label, findings|
-        port_node = Node.create(:label => port_label, :parent_id => host_node.id)
-        findings.each do |severity, finding|
-          severity_node = Node.create(:label => severity, :parent_id => port_node.id)
-          finding.each do |find|
-            Note.create(
-                :node => severity_node,
-                :author => @plugin_author_name,
-                :category => @category,
-                :text => find
-            )
-          end
-        end
-      end
+    private
+    attr_accessor :host_node
+
+    def process_result(xml_result)
+      # Extract host
+      host_label = xml_result.at_xpath('./host').text()
+      self.host_node = content_service.create_node(label: host_label, type: :host)
+
+      # Uniquely identify this issue
+      nvt_oid = xml_result.at_xpath('./nvt')[:oid]
+
+      logger.info{ "\t\t => Creating new issue (#{nvt_oid})" }
+
+      issue_text = template_service.process_template(template: 'result', data: xml_result)
+      issue = content_service.create_issue(text: issue_text, id: nvt_oid)
+
+
+      # Add evidence. It doesn't look like OpenVAS provides much in terms of
+      # instance-specific evidence though.
+      logger.info{ "\t\t => Adding reference to this host" }
+
+      port_info = xml_result.at_xpath('./port').text
+      evidence_content = "\n#[Port]#\n#{port_info}\n\n"
+
+      # There is no way of knowing where OpenVAS is going to place the evidence
+      # for each issue. For example:
+      #
+      # A) 1.3.6.1.4.1.25623.1.0.900498 - 'Apache Web ServerVersion Detection'
+      # uses the full <description> field:
+      #
+      #      <description>Detected Apache Tomcat version: 2.2.22
+      #       Location: 80/tcp
+      #       CPE: cpe:/a:apache:http_server:2.2.22
+      #
+      #       Concluded from version identification result:
+      #       Server: Apache/2.2.22
+      #      </description>
+      #
+      # B) 1.3.6.1.4.1.25623.1.0.103122 - 'Apache Web Server ETag Header
+      # Information Disclosure Weakness' uses the 'Information that was gathered'
+      # meta-field inside <description>
+      #
+      #      <description>
+      #         Summary:
+      #         A weakness has been discovered in Apache web servers that are
+      #        configured to use the FileETag directive. Due to the way in which
+      #        [...]
+      #
+      #         Solution:
+      #         OpenBSD has released a patch to address this issue.
+      #        [...]
+      #
+      #        Information that was gathered:
+      #        Inode: 5753015
+      #        Size: 604
+      #        </description>
+      #
+      # C) 1.3.6.1.4.1.25623.1.0.10766 - 'Apache UserDir Sensitive Information Disclosure'
+      # doesn't provide any per-instance information.
+      #
+      # Best thing to do is to include the full <description> field and let the user deal with it.
+      description = xml_result.at_xpath('./description').text()
+      evidence_content << "\n#[Description]#\n#{description}\n\n"
+
+      content_service.create_evidence(issue: issue, node: host_node, content: evidence_content)
     end
 
   end
-
-  def self.parse_openvas_xml(doc)
-    results = doc.search('results')
-
-    hosts = Array.new
-    results.search('result').each do |host|
-      current_host = Hash.new
-      current_host['name'] = host.search('host')[0]['name']
-      current_host['ip'] = host.search('host')[0]['ip']
-      current_host['start_time'] = host.search('start').text
-      current_host['end_time'] = host.search('end').text
-      current_host['ports'] = Hash.new
-
-      host.search('port').each do |port|
-        protocol = port['protocol']
-        portid = port['portid']
-
-        #Handle the case where OpenVAS has a port with no protocol or portid
-        if protocol.length == 0 || portid.length == 0
-          protocol = "Generic"
-          portid = "Information"
-        end
-
-        port_label = protocol + '-' + portid
-
-        current_host['ports'][port_label] = Hash.new
-
-        port.search('information').each do |finding|
-          unless current_host['ports'][port_label][finding.search('severity').text]
-            current_host['ports'][port_label][finding.search('severity').text] = Array.new
-          end
-          current_host['ports'][port_label][finding.search('severity').text] << finding.search('data').text
-        end
-
-      end
-      hosts << current_host
-    end
-    return hosts
-  end
-
-
 end
