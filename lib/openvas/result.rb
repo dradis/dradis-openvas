@@ -157,3 +157,7 @@ module OpenVAS
     end
   end
 end
+
+
+require 'openvas/v6/result'
+require 'openvas/v7/result'
