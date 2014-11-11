@@ -1,6 +1,6 @@
 # OpenVAS plugin for Dradis
 
-[![Build Status](https://secure.travis-ci.org/dradis/dradis-openvas.png?branch=master)](http://travis-ci.org/dradis/dradis-openvas)
+[![Build Status](https://secure.travis-ci.org/dradis/dradis-openvas.png?branch=master)](http://travis-ci.org/dradis/dradis-openvas) [![Code Climate](https://codeclimate.com/github/dradis/dradis-openvas.png)](https://codeclimate.com/github/dradis/dradis-openvas.png)
 
 The OpenVAS add-on enables users to upload OpenVAS XML files to create a structure of nodes/notes that contain the same information about the hosts/ports/services as the original file.
 
