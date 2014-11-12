@@ -1,4 +1,4 @@
-# OpenVAS plugin for Dradis
+# OpenVAS add-on for Dradis
 
 [![Build Status](https://secure.travis-ci.org/dradis/dradis-openvas.png?branch=master)](http://travis-ci.org/dradis/dradis-openvas) [![Code Climate](https://codeclimate.com/github/dradis/dradis-openvas.png)](https://codeclimate.com/github/dradis/dradis-openvas.png)
 
