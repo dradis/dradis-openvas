@@ -8,8 +8,6 @@ require 'support/fixture_loader'
 
 RSpec.configure do |config|
   # CLI niceties
-  config.color = true
-  config.formatter = :documentation
   config.order = :random
 
   # Filter which specs to run
