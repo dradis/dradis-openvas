@@ -35,7 +35,7 @@ module OpenVAS
     # This allows external callers (and specs) to check for implemented
     # properties
     def respond_to?(method, include_private=false)
-      return true if supported_tags.include?(method)
+      return true if supported_tags.include?(method.to_sym)
       super
     end
 
