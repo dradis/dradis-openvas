@@ -5,6 +5,7 @@ result.notes
 result.overrides
 result.name
 result.cvss_base
+result.cvss_base_vector
 result.risk_factor
 result.cve
 result.bid
