@@ -22,12 +22,12 @@ module OpenVAS
         # NONE
 
         # simple tags
-        :threat, :description, :original_threat, :notes, :overrides,
+        :port, :threat, :description, :original_threat, :notes, :overrides,
 
         # nested tags
         :name, :cvss_base, :risk_factor, :cve, :bid, :xref,
 
-        # fields inside :description
+        # fields inside :tags
         :summary, :info_gathered, :insight, :impact, :impact_level, :affected_software, :solution
       ]
     end
