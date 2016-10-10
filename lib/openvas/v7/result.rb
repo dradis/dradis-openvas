@@ -16,7 +16,7 @@ module OpenVAS::V7
       if @tag_fields.nil?
         delimiters = {
           # Not supported via .fields
-          # 'cvss_base_vector='
+          'cvss_base_vector=' => :cvss_base_vector,
           'impact=' => :impact,
 
           # Not supported via .fields
