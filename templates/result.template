@@ -16,14 +16,10 @@
 
 
 #[References]#
-CVE
-%result.cve%
-
-BID
-%result.bid%
-
-Other
-%result.xref%
+CVE: %result.cve%
+CVSS Vector: %cvss_base_vector%
+BID: %result.bid%
+Other: %result.xref%
 
 
 #[RawDescription]#
