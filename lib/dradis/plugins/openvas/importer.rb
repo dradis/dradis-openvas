@@ -51,8 +51,8 @@ module Dradis::Plugins::OpenVAS
       # instance-specific evidence though.
       logger.info{ "\t\t => Adding reference to this host" }
 
-      port_info = xml_result.at_xpath('./port').text
-      evidence_content = "\n#[Port]#\n#{port_info}\n\n"
+      # port_info = xml_result.at_xpath('./port').text
+      # evidence_content = "\n#[Port]#\n#{port_info}\n\n"
 
       # There is no way of knowing where OpenVAS is going to place the evidence
       # for each issue. For example:
@@ -91,9 +91,10 @@ module Dradis::Plugins::OpenVAS
       # doesn't provide any per-instance information.
       #
       # Best thing to do is to include the full <description> field and let the user deal with it.
-      description = xml_result.at_xpath('./description').text()
-      evidence_content << "\n#[Description]#\n#{description}\n\n"
-
+      
+      # description = xml_result.at_xpath('./description').text()
+      # evidence_content << "\n#[Description]#\n#{description}\n\n"
+      evidence_content = template_service.process_template(template: 'evidence', data: xml_result)
       content_service.create_evidence(issue: issue, node: host_node, content: evidence_content)
     end
 
