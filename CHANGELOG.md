@@ -1,3 +1,6 @@
-## Dradis Framework 3.6 (March XX, 2017) ##
+## Dradis Framework 3.7 (XX) ##
+*   Add Evidence template.
+
+## Dradis Framework 3.6 (Apr 6, 2017) ##
 
 *   No changes.
