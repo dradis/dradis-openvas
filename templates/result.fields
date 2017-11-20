@@ -8,6 +8,7 @@ result.cve
 result.bid
 result.xref
 result.summary
+result.vuldetect
 result.insight
 result.info_gathered
 result.impact

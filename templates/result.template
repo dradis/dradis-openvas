@@ -7,11 +7,17 @@
 #[Description]#
 %result.summary%
 
+#[Insight]#
+%result.insight%
+
+#[Detection]#
+%result.vuldetect%
+
 #[Recommendation]#
 %result.solution%
 
 #[References]#
 CVE: %result.cve%
-CVSS Vector: %cvss_base_vector%
+CVSS Vector: %result.cvss_base_vector%
 BID: %result.bid%
 Other: %result.xref%

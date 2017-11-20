@@ -20,7 +20,7 @@ module OpenVAS::V7
           'impact=' => :impact,
 
           # Not supported via .fields
-          # 'vuldetect='
+          'vuldetect=' => :vuldetect,
           'insight=' => :insight,
           'solution=' => :solution,
           'summary=' => :summary,
