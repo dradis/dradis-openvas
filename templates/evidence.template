@@ -1,6 +1,11 @@
 #[Port]#
 %evidence.port%
 
+#[Threat]#
+%evidence.threat%
+
+#[Severity]#
+%evidence.severity%
 
 #[Description]#
 %evidence.description%

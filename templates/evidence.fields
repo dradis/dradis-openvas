@@ -1,2 +1,6 @@
+evidence.threat
+evidence.original_threat
+evidence.severity
+evidence.original_severity
 evidence.port
 evidence.description

@@ -1,12 +1,8 @@
 #[Title]#
 %result.name%
 
-
-#[CVSSv2]#
+#[CVSS]#
 %result.cvss_base%
-
-#[AffectedSoftware]#
-%result.affected_software%
 
 #[Description]#
 %result.summary%
@@ -14,14 +10,8 @@
 #[Recommendation]#
 %result.solution%
 
-
 #[References]#
 CVE: %result.cve%
 CVSS Vector: %cvss_base_vector%
 BID: %result.bid%
 Other: %result.xref%
-
-
-#[RawDescription]#
-(note that some of the information below can change from instance to instance of this problem)
-%result.description%

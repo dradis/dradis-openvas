@@ -22,7 +22,7 @@ module OpenVAS
         # NONE
 
         # simple tags
-        :port, :threat, :description, :original_threat, :notes, :overrides,
+        :port, :threat, :severity, :description, :original_threat, :original_severity, :notes, :overrides,
 
         # nested tags
         :name, :cvss_base, :risk_factor, :cve, :bid, :xref,
