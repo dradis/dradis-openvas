@@ -1,6 +1,8 @@
-## Dradis Framework 3.8 (September, 2017) ##
+## Dradis Framework 3.8 (XXXX, 2017) ##
+*  Move `threat` and `severity` available fields to the Evidence level to
+   accomodate changing values
 
-*   No changes.
+*  Add `results.vuldetect` as an available field
 
 ## Dradis Framework 3.7 (Jul, 2017) ##
 
