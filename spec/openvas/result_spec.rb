@@ -15,7 +15,7 @@ require 'spec_helper'
         plugin: plugin
       )
 
-      @importer = Dradis::Plugins::OpenVAS::Importer.new(
+      @importer = plugin::Importer.new(
         content_service: @content_service
       )
 
