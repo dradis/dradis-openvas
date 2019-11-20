@@ -17,3 +17,4 @@ result.impact
 result.impact_level
 result.affected_software
 result.solution
+result.solution_type

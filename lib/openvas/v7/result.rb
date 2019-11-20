@@ -18,6 +18,7 @@ module OpenVAS::V7
           # Not supported via .fields
           'cvss_base_vector=' => :cvss_base_vector,
           'impact=' => :impact,
+          'solution_type=' => :solution_type,
 
           # Not supported via .fields
           # 'vuldetect='
