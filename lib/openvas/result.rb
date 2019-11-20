@@ -28,7 +28,7 @@ module OpenVAS
         :name, :cvss_base, :risk_factor, :cve, :bid, :xref,
 
         # fields inside :tags
-        :summary, :info_gathered, :cvss_base_vector, :insight, :impact, :impact_level, :affected_software, :solution, :solution_type
+        :summary, :info_gathered, :cvss_base_vector, :insight, :impact, :impact_level, :affected_software, :solution, :solution_type, :vuldetect
       ]
     end
 
