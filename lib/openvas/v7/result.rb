@@ -21,11 +21,11 @@ module OpenVAS::V7
           'solution_type=' => :solution_type,
 
           # Not supported via .fields
-          'vuldetect=' => :vuldetect,
+          'affected=' => :affected_software,
           'insight=' => :insight,
           'solution=' => :solution,
           'summary=' => :summary,
-          'affected=' => :affected_software
+          'vuldetect=' => :vuldetect
 
           # Missing fields, these used to be available under <description> but it
           # doesn't look like they are under <tags>
