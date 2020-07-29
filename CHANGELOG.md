@@ -1,3 +1,7 @@
+## Dradis Framework 3.19 (XXX, 2020) ##
+
+*   Added `result.vuldetect` and `result.solution_type` fields
+
 ## Dradis Framework 3.18 (July, 2020) ##
 
 *   No changes.

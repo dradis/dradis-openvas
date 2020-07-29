@@ -18,13 +18,14 @@ module OpenVAS::V7
           # Not supported via .fields
           'cvss_base_vector=' => :cvss_base_vector,
           'impact=' => :impact,
+          'solution_type=' => :solution_type,
 
           # Not supported via .fields
-          # 'vuldetect='
+          'affected=' => :affected_software,
           'insight=' => :insight,
           'solution=' => :solution,
           'summary=' => :summary,
-          'affected=' => :affected_software
+          'vuldetect=' => :vuldetect
 
           # Missing fields, these used to be available under <description> but it
           # doesn't look like they are under <tags>
