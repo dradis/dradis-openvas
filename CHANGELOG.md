@@ -1,3 +1,6 @@
+v4.3.0 (XXXX 2022)
+  - Update Node label parsing so that `<hostname>` tags don't cause problems
+
 v4.2.0 (February 2022)
   - No changes
 

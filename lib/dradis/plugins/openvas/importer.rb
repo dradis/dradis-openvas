@@ -35,7 +35,7 @@ module Dradis::Plugins::OpenVAS
 
     def process_result(xml_result)
       # Extract host
-      host_label = xml_result.at_xpath('./host').text()
+      host_label = xml_result.at_xpath('./host/text()').to_s
       self.host_node = content_service.create_node(label: host_label, type: :host)
 
       # Uniquely identify this issue
