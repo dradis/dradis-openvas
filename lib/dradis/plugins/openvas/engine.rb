@@ -11,9 +11,5 @@ module Dradis::Plugins::OpenVAS
         inflect.acronym('OpenVAS')
       end
     end
-
-    def self.template_names
-      { module_parent => { evidence: 'evidence', issue: 'result' } }
-    end
   end
 end
