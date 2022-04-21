@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report id="9917b2e8-7db6-475b-b591-bd3ba828625c">
+   <report>
+      <results>
+         <result id="32249f6c-89f1-4a93-888f-29404b01374f">
+            <subnet>188.111.11.85</subnet>
+            <host>188.111.11.85<hostname>www.google.com</hostname></host>
+            <port>http (80/tcp)</port>
+            <nvt oid="1.3.6.1.4.1.25623.1.0.103122">
+               <name>Apache Web Server ETag Header Information Disclosure Weakness</name>
+               <family>Web application abuses</family>
+               <cvss_base>4.3</cvss_base>
+               <risk_factor>Medium</risk_factor>
+               <cve>CVE-2003-1418</cve>
+               <bid>6939</bid>
+               <tags>cvss_base_vector=AV:N/AC:M/Au:N/C:P/I:N/A:N|summary=A weakness has been discovered in Apache web servers that are
+configured to use the FileETag directive. Due to the way in which
+Apache generates ETag response headers, it may be possible for an
+attacker to obtain sensitive information regarding server files.
+Specifically, ETag header fields returned to a client contain the
+file's inode number.
+
+Exploitation of this issue may provide an attacker with information
+that may be used to launch further attacks against a target network.
+
+OpenBSD has released a patch that addresses this issue. Inode numbers
+returned from the server are now encoded using a private hash to avoid
+the release of sensitive information.|solution=OpenBSD has released a patch to address this issue.
+
+Novell has released TID10090670 to advise users to apply the available
+workaround of disabling the directive in the configuration file for
+Apache releases on NetWare. Please see the attached Technical
+Information Document for further details.</tags>
+               <cert>
+                  <warning>database not available</warning>
+               </cert>
+               <xref>URL:https://www.securityfocus.com/bid/6939, URL:http://httpd.apache.org/docs/mod/core.html#fileetag, URL:http://www.openbsd.org/errata32.html, URL:http://support.novell.com/docs/Tids/Solutions/10090670.html</xref>
+            </nvt>
+            <threat>Medium</threat>
+            <description>Summary:
+ A weakness has been discovered in Apache web servers that are
+configured to use the FileETag directive. Due to the way in which
+Apache generates ETag response headers, it may be possible for an
+attacker to obtain sensitive information regarding server files.
+Specifically, ETag header fields returned to a client contain the
+file's inode number.
+
+Exploitation of this issue may provide an attacker with information
+that may be used to launch further attacks against a target network.
+
+OpenBSD has released a patch that addresses this issue. Inode numbers
+returned from the server are now encoded using a private hash to avoid
+the release of sensitive information.
+ Solution:
+ OpenBSD has released a patch to address this issue.
+
+Novell has released TID10090670 to advise users to apply the available
+workaround of disabling the directive in the configuration file for
+Apache releases on NetWare. Please see the attached Technical
+Information Document for further details.
+
+Information that was gathered:
+Inode: 1050855
+Size: 177</description>
+            <original_threat>Medium</original_threat>
+            <notes />
+            <overrides />
+         </result>
+      </results>
+   </report>
+</report>
