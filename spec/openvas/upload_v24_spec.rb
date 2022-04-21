@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'byebug'
+
 describe 'Openvas upload plugin' do
   describe 'importer' do
     before(:each) do
