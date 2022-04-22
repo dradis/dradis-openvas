@@ -1,3 +1,6 @@
+v4.3.0 (XXXX 2022)
+  - Update Node label parsing. Include :hostname and :asset_id properties.
+
 v4.2.0 (February 2022)
   - No changes
 
