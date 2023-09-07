@@ -2,10 +2,9 @@ $:.push File.expand_path('../lib', __FILE__)
 require 'dradis/plugins/openvas/version'
 version = Dradis::Plugins::OpenVAS::VERSION::STRING
 
-
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |spec|
-  spec.platform      = Gem::Platform::RUBY
+  spec.platform = Gem::Platform::RUBY
   spec.name = 'dradis-openvas'
   spec.version = version
   spec.summary = 'OpenVAS add-on for the Dradis Framework.'
@@ -14,11 +13,10 @@ Gem::Specification.new do |spec|
   spec.license = 'GPL-2'
 
   spec.authors = ['Daniel Martin']
-  spec.email = ['etd@nomejortu.com']
-  spec.homepage = 'http://dradisframework.org'
+  spec.homepage = 'https://dradis.com/integrations/openvas.html'
 
   spec.files = `git ls-files`.split($\)
-  spec.executables = spec.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  spec.executables = spec.files.grep(%r{^bin/}).map { |f| File.basename(f) }
   spec.test_files = spec.files.grep(%r{^(test|spec|features)/})
 
   # By not including Rails as a dependency, we can use the gem with different
@@ -31,5 +29,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec-rails'
   spec.add_development_dependency 'combustion', '~> 0.5.2'
-
 end
