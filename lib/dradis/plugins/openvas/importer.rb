@@ -45,7 +45,7 @@ module Dradis::Plugins::OpenVAS
 
       logger.info{ "\t\t => Creating new issue (#{nvt_oid})" }
 
-      issue_text = template_service.process_template(template: 'result', data: xml_result)
+      issue_text = mapping_service.apply_mapping(source: 'result', data: xml_result)
       issue = content_service.create_issue(text: issue_text, id: nvt_oid)
 
 
@@ -90,8 +90,8 @@ module Dradis::Plugins::OpenVAS
       # doesn't provide any per-instance information.
       #
       # Best thing to do is to include the full <description> field and let the user deal with it.
-      
-      evidence_content = template_service.process_template(template: 'evidence', data: xml_result)
+
+      evidence_content = mapping_service.apply_mapping(source: 'evidence', data: xml_result)
       content_service.create_evidence(issue: issue, node: host_node, content: evidence_content)
     end
 
