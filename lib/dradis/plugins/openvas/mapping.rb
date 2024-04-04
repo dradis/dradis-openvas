@@ -19,5 +19,35 @@ module Dradis::Plugins::OpenVAS
                             {{ openvas[result.description] }}"
       }
     }.freeze
+
+    SOURCE_FIELDS = {
+      evidence: [
+        'evidence.port',
+        'evidence.description'
+      ],
+      result: [
+        'result.threat',
+        'result.description',
+        'result.original_threat',
+        'result.notes',
+        'result.overrides',
+        'result.name',
+        'result.cvss_base',
+        'result.cvss_base_vector',
+        'result.risk_factor',
+        'result.cve',
+        'result.bid',
+        'result.xref',
+        'result.summary',
+        'result.insight',
+        'result.info_gathered',
+        'result.impact',
+        'result.impact_level',
+        'result.affected_software',
+        'result.solution',
+        'result.solution_type',
+        'result.vuldetect'
+      ]
+    }.freeze
   end
 end
