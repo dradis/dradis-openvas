@@ -11,12 +11,8 @@ module Dradis::Plugins::OpenVAS
         'AffectedSoftware' => '{{ openvas[result.affected_software] }}',
         'Description' => '{{ openvas[result.summary] }}',
         'Recommendation' => '{{ openvas[result.solution] }}',
-        'References' => "CVE: {{ openvas[result.cve] }}\n
-                        CVSS Vector: {{ cvss_base_vector }}\n
-                        BID: {{ openvas[result.bid] }}\n
-                        Other: {{ openvas[result.xref] }}",
-        'RawDescription' => "(note that some of the information below can change from instance to instance of this problem)\n
-                            {{ openvas[result.description] }}"
+        'References' => "CVE: {{ openvas[result.cve] }}\nCVSS Vector: {{ cvss_base_vector }}\nBID: {{ openvas[result.bid] }}\nOther: {{ openvas[result.xref] }}",
+        'RawDescription' => "(note that some of the information below can change from instance to instance of this problem)\n {{ openvas[result.description] }}"
       }
     }.freeze
 
